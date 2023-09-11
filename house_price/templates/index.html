@@ -1,0 +1,96 @@
+{% load static %} 
+<html>
+<head>
+ 
+    <!-- Required meta tags>-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+    <script src="https://kit.fontawesome.com/ad67667019.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header style=" background-color: #011f2a;height: 100%; background-image: url(https://assets.architecturaldigest.in/photos/60083e76274aca243711c3a4/4:3/w_1024,h_768,c_limit/ghaziabad-uttar-pradesh-homes-photos-1366x768.jpg); 
+    background-size: 100%;opacity: 1;">
+
+        <section class="head-bar">
+            <nav>
+                <ul>
+                    <h1 class = "nav1"><b>House Price</b></h1>
+                    <i class="fa-solid fa-house" style="float: right;font-size: 30px;color: white;margin-top: -40px;margin-right: 10px;"></i>
+                </ul>
+                
+            </nav>
+        </section>
+
+        <section>
+            <form action="predict" method="POST">
+                {% csrf_token %}
+                                <div class="search-container">
+                                    
+                                    <input type="text" class="search-input"  style="width: 25%;margin-left: 38%;" id="movies" name="area" placeholder="Enter Area (sq.ft) ...." aria-label="Default select example"></input><br>
+                                    
+                                    <label style="margin-bottom:-10px;margin-left: 25%;color: red;font-size: 20px;"><b>Location</b></label>
+                                    <select class="search-input" style="margin-top: 25px;" id="movies" name="location" aria-label="Default select example">
+
+                                        {% for i in location_list %}
+                                            <option value="{{i}}">{{i}}</option>
+                                        {% endfor %}
+                                        
+                                    </select><br>
+                                    <label style="margin-bottom:-10px;margin-left: 38%;color: red;font-size: 20px;"><b>Bedroom</b></label>
+                                    <select class="search-input" style="margin-top: 25px;width: 25%;margin-left: 38%;" id="movies" name="bedroom"  aria-label="Default select example">
+                                        
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        
+                                    </select><br>
+                                    <label style="margin-bottom:-10px;margin-left: 38%;color: red;font-size: 20px;"><b>Bathroom</b></label>
+                                    <select class="search-input" style="margin-top: 25px;width: 25%;margin-left: 38%;" id="movies" name="bathroom" aria-label="Default select example">
+                                
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        
+                                    </select><br>
+                                </div>
+                    <br>
+                    <button class="btn" style="border-radius:15px;height: 50px;" type="submit">Predict</button>
+                    <a class="btn2" href="{% url 'home' %}" style="border-radius:15px;height: 50px;color: white;">Reset</a>
+
+            </form>
+        </section>
+       
+
+        {% if status == True %}
+            <section>
+                <div class="search-output" style="margin-left: 42%;">
+                    <h1 style="font-size:25px;color: green;"><b>{{output}}&nbspLakh</b></h1>
+                </div>
+            
+            </section>
+        {% endif %}
+
+    </header>
+
+    <!--<section class="info">                  
+    </section>-->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
